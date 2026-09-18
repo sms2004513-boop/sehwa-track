@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>(주)세화산업 진행 현황</title>
+<!--
+  track.sehwaind.kr — 진행 조회 짧은 주소
+  ?k=토큰 으로 들어오면 아래 WEBAPP_URL 로 그대로 넘겨줍니다.
+
+  [웹앱을 새로 배포해서 주소가 바뀌었을 때]
+  아래 WEBAPP_URL 한 줄만 새 주소로 고치면 됩니다. 고객에게 나간 링크는 그대로 씁니다.
+  (GitHub 저장소에서 index.html 을 열고 연필 아이콘 → 수정 → Commit)
+-->
+<script>
+  var WEBAPP_URL = "https://script.google.com/macros/s/AKfycbyPbfdvxj_Ik18pi_D1XwbSuj1bRwHjzkriPF7btBkBpQMdEPScFsBydx_9RU9msJlk/exec";
+  var CONTACT    = "031-366-0394 / 관리부";
+
+  (function () {
+    var q = new URLSearchParams(location.search);
+    var k = (q.get("k") || "").trim();
+    if (!k && location.pathname && location.pathname.length > 1) {
+      // track.sehwaind.kr/토큰 형태도 허용
+      k = decodeURIComponent(location.pathname.replace(/^\/+|\/+$/g, ""));
+    }
+    if (/^[A-Za-z0-9]{8,64}$/.test(k)) {
+      location.replace(WEBAPP_URL + "?k=" + encodeURIComponent(k));
+    } else {
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("wait").style.display = "none";
+        document.getElementById("msg").style.display = "block";
+      });
+    }
+  })();
+</script>
+<style>
+  body{margin:0;background:#fafaf7;color:#2C2C2A;
+       font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+       display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
+  .box{max-width:460px;text-align:center}
+  h1{font-size:19px;font-weight:600;margin:0 0 10px}
+  p{font-size:14px;color:#6f6e69;line-height:1.7;margin:6px 0}
+  .wait{font-size:14px;color:#6f6e69}
+  #msg{display:none}
+</style>
+</head>
+<body>
+  <div class="box">
+    <div class="wait" id="wait">진행 현황 화면으로 이동하고 있습니다…</div>
+    <div id="msg">
+      <h1>링크를 확인할 수 없습니다</h1>
+      <p>주소가 잘못되었거나 링크가 잘려서 전달된 것 같습니다.<br>
+         받으신 메일이나 문자의 링크를 다시 눌러 주세요.</p>
+      <p>문의: <span id="c"></span></p>
+    </div>
+  </div>
+  <script>document.getElementById("c").textContent = CONTACT;</script>
+</body>
+</html>
